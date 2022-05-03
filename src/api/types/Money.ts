@@ -1,3 +1,5 @@
 export type Money = {
-    price: number
+    sell: number,
+    buy?: number,
+    spot?: number
 }
