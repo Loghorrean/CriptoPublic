@@ -10,15 +10,20 @@ const BitcoinChart = () => {
             const newBitcoinData = await provider.getPrices("BTC");
             setBitcoinData([newBitcoinData]);
         }
+        loadData().catch((error) => {
+            console.log(error);
+        })
         const intervalId = setInterval(() => {
             loadData().catch((error) => {
                 console.log(error)
             })
         }, 5000);
+        console.log(intervalId);
         return () => {
+            console.log("CLEARED ID " + intervalId);
             clearInterval(intervalId)
         };
-    });
+    }, []);
     const sellItems = () => {
         return bitcoinData.map((row, index) => {
             return <tr key={index}>

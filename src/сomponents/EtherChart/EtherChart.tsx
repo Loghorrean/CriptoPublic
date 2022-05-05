@@ -10,15 +10,20 @@ const EtherChart = () => {
             const newEtherData = await provider.getPrices("ETH");
             setEtherData([newEtherData]);
         }
+        loadData().catch((error) => {
+            console.log(error);
+        })
         const intervalId = setInterval(() => {
             loadData().catch((error) => {
                 console.log(error)
             })
         }, 5000);
+        console.log(intervalId);
         return () => {
+            console.log("CLEARED ID " + intervalId);
             clearInterval(intervalId)
         };
-    });
+    }, []);
     const sellItems = () => {
         return etherData.map((row, index) => {
             return <tr key={index}>
